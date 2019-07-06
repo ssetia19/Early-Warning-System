@@ -17,6 +17,10 @@ class ConvolutionalNeuralNetwork():
 		convnet = input_data(shape=[None, utils.IMG_SIZE, utils.IMG_SIZE, 3], name='input')
 
 		convnet = conv_2d(convnet, 32, 3, activation='relu')
+		#convnet is the input layer
+		#conv_2d is the convolution function
+		#32 is 32x32 size of ? and 3 is ?
+		#relu is activation function like sigmoid, tanh, relu=max(0,val), etc
 		convnet = max_pool_2d(convnet, 2)
 
 		convnet = conv_2d(convnet, 64, 3, activation='relu')
@@ -34,13 +38,17 @@ class ConvolutionalNeuralNetwork():
 		#fully connected layer with relu activation
 		convnet = fully_connected(convnet, 1024, activation='relu')
 		convnet = dropout(convnet, 0.6)
+		#dropout is regularization technique
 
 		convnet = fully_connected(convnet, 512, activation='relu')
 		convnet = dropout(convnet, 0.6)
 
 		# fully connected with softmax activation ( OUTPUT LAYER )
 		convnet = fully_connected(convnet, 10, activation='softmax')
+		#10 is the final 10 nodes in the output layer because of 10 classes of output
 		convnet = regression(convnet, optimizer='adam', learning_rate= utils.LR, loss='categorical_crossentropy', name='targets')
+		#this is not linear regression type, it is actually ?
+		
 
 		return convnet
 		
@@ -60,11 +68,13 @@ class ConvolutionalNeuralNetwork():
 
 		convnet = self.tflearn_definition()
 		model = tflearn.DNN(convnet, tensorboard_dir='./models/log', tensorboard_verbose=0)
+		#DNN is deep neural network
+		#verbose is ?
 
 		if os.path.isfile("./models/cnn.model.meta"):
 			model.load('./models/cnn.model')
 		else:
-			model.fit({'input': x_train}, {'targets': y_train}, n_epoch=10, 
+			model.fit({'input': x_train}, {'targets': y_train}, n_epoch=10,#epoch is basically no of times we are gonno train it 
 			          validation_set=({'input': x_validation}, {'targets': y_validation}), 
 			          snapshot_step=500, show_metric=True, run_id=utils.MODEL_NAME)
 			model.save('./models/cnn.model')
