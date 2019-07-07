@@ -77,7 +77,8 @@ class ConvolutionalNeuralNetwork():
 			model.load('./models/cnn.model')
 		else:
 			model.fit({'input': x_train}, {'targets': y_train}, n_epoch=10,#epoch is basically no of times we are gonno train it 
-			          validation_set=({'input': x_validation}, {'targets': y_validation}), 
+			          #when the whole training set passed through the ANN, that makes an EPOOCH
+				  validation_set=({'input': x_validation}, {'targets': y_validation}), 
 			          snapshot_step=500, show_metric=True, run_id=utils.MODEL_NAME)
 			model.save('./models/cnn.model')
 
