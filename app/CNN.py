@@ -46,6 +46,7 @@ class ConvolutionalNeuralNetwork():
 		# fully connected with softmax activation ( OUTPUT LAYER )
 		convnet = fully_connected(convnet, 10, activation='softmax')
 		#10 is the final 10 nodes in the output layer because of 10 classes of output
+		#ssoftmax makes the output between 0 and 1
 		convnet = regression(convnet, optimizer='adam', learning_rate= utils.LR, loss='categorical_crossentropy', name='targets')
 		#this is not linear regression type, it is actually ?
 		
