@@ -49,6 +49,7 @@ class ConvolutionalNeuralNetwork():
 		#ssoftmax makes the output between 0 and 1
 		convnet = regression(convnet, optimizer='adam', learning_rate= utils.LR, loss='categorical_crossentropy', name='targets')
 		#this is not linear regression type, it is actually ?
+		#learning_rate decide by how much we update the weights during backpropagation in training period.
 		
 
 		return convnet
